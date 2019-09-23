@@ -33,8 +33,8 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("-----标题-----")
-                .description("-----描述-----")
+                .title("补天计划")
+                .description("介似个补天计划")
                 .contact("1608620445@qq.com")
                 .version("V1.0.0")
                 .build();

@@ -1,6 +1,7 @@
 package com.bigxd.bt.controller;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
 
     @ApiOperation(value = "helloWorld123", notes = "第一次写代码都写这个")
-    @RequestMapping(name = "/helloWorld")
+    @GetMapping(value = "/helloWorld")
     public String helloWorld() {
         return "helloWorld456";
     }
