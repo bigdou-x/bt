@@ -6,6 +6,8 @@ import router from "./router";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
+import upperFirst from 'lodash/upperFirst';
+import camelCase from 'lodash/camelCase';
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
