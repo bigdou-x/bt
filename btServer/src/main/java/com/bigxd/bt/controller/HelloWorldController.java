@@ -3,7 +3,6 @@ package com.bigxd.bt.controller;
 import com.bigxd.bt.entity.User;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 /**
