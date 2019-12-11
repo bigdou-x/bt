@@ -6,9 +6,12 @@
     <el-form-item prop="password">
       <el-input placeholder="请输入密码" v-model="user.password" show-password></el-input>
     </el-form-item>
+    <el-form-item prop="remember-me">
+      <el-checkbox v-model="rememberme" label="记住我" style="float:left"></el-checkbox>
+    </el-form-item>
     <el-form-item label>
-      <el-button type="primary" plain @click="login('loginForm')">登录</el-button>
-      <el-button type="primary" plain>注册</el-button>
+      <el-button type="primary" plain @click="login()">登录</el-button>
+      <el-button type="primary" plain @click="registry()">注册</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -22,6 +25,7 @@ export default {
         email: "",
         password: ""
       },
+      rememberme: false,
       loading: false,
       rules: {
         email: [
@@ -40,17 +44,41 @@ export default {
     };
   },
   methods: {
-    login(loginForm) {
-      this.$refs[loginForm].validate(valid => {
+    registry() {
+      this.$refs["loginForm"].validate(valid => {
         if (valid) {
-          this.axios({
+          this.$axios({
             method: "post",
-            url: "/rest/user/registry",
+            url: "/registry",
             data: this.user
           }).then(resp => {});
         } else {
           console.info("fail");
           return;
+        }
+      });
+    },
+    login() {
+      let _this = this;
+      this.loading = true;
+      this.$refs["loginForm"].validate(valid => {
+        if (valid) {
+          _this
+            .postRequest("/login", {
+              email: this.user.email,
+              password: this.user.password,
+              rememberMe: this.rememberme
+            })
+            .then(resp => {
+              _this.loading = false;
+              if (resp && resp.status == "200") {
+                window.localStorage.setItem("email", this.user.email);
+                var path = _this.$route.query.redirect;
+                _this.$router.replace({
+                  path: path == "/" || path == undefined ? "/home" : path
+                });
+              }
+            });
         }
       });
     }
